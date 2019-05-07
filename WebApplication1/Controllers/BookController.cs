@@ -16,9 +16,28 @@ namespace WebApplication1.Controllers
         private BookService db = new BookService();
 
         // GET: Book
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Books.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var books = from s in db.Books
+                           select s;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    books = books.OrderByDescending(s => s.Book_Name);
+                    break;
+                case "Date":
+                    books = books.OrderBy(s => s.Book_BoughtDate);
+                    break;
+                case "date_desc":
+                    books = books.OrderByDescending(s => s.Book_BoughtDate);
+                    break;
+                default:
+                    books = books.OrderBy(s => s.Book_Name);
+                    break;
+            }
+            return View(books.ToList());
         }
 
         // GET: Book/Details/5
@@ -49,11 +68,18 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Book_Id,Book_Name,Book_Author,Book_BoughtDate,Book_Publisher,Book_Note,Book_Status,Book_Keeper,Create_Date,Create_User,Modify_Date,Modify_User")] Book book)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Books.Add(book);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Books.Add(book);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
             return View(book);
@@ -91,11 +117,15 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Book/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
             Book book = db.Books.Find(id);
             if (book == null)
@@ -110,9 +140,17 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Book book = db.Books.Find(id);
-            db.Books.Remove(book);
-            db.SaveChanges();
+            try
+            {
+                Book book = db.Books.Find(id);
+                db.Books.Remove(book);
+                db.SaveChanges();
+            }
+            catch (DataException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
 
