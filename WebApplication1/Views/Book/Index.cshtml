@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WebApplication1.Models.Book_Data>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>查詢</h2>
+
+<p>
+    @Html.ActionLink("新增書籍", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            書名
+        </th>
+        <th>
+            作者
+        </th>
+        <th>
+           購書日期
+        </th>
+        <th>
+            借閱狀態
+        </th>
+        <th>
+            借閱人
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Book_Name
+        </td>
+        <td>
+            @item.Book_Author
+        </td>
+        <td>
+            @item.Book_Bought_Date
+        </td>
+        <td>
+            @item.Book_Status
+        </td>
+        <td>
+            @item.Book_Keeper
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Book_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Book_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Book_Id })
+        </td>
+    </tr>
+}
+
+</table>
