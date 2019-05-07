@@ -1,0 +1,106 @@
+﻿@model WebApplication1.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_BoughtDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_BoughtDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Publisher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Publisher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Keeper)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Keeper)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Create_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Create_User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create_User)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modify_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modify_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modify_User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modify_User)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Book_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

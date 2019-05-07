@@ -10,9 +10,11 @@ namespace WebApplication1.Models
 {
     public class Book
     {
-        [Key]
+        
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, Column(Order = 0)]
         public int Book_Id { get; set; }
+        [Required]
         public string Book_Name { get; set; }
         public string Book_Author { get; set; }
         public DateTime Book_BoughtDate { get; set; }

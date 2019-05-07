@@ -28,6 +28,6 @@ namespace WebApplication1.Models
         public virtual DbSet<Book_Class> Book_Class { get; set; }
         public virtual DbSet<Book_Code> Book_Code { get; set; }
         public virtual DbSet<Book_Data> Book_Data { get; set; }
-        public virtual DbSet<Member> Member_M { get; set; }
+        public virtual DbSet<Member> Member { get; set; }
     }
 }

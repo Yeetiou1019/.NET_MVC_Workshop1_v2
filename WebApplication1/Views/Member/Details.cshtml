@@ -1,0 +1,66 @@
+﻿@model WebApplication1.Models.Member
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Member</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User_CName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_CName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_EName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_EName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Create_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Create_User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create_User)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modify_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modify_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modify_User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modify_User)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.User_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

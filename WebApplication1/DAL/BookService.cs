@@ -16,6 +16,7 @@ namespace WebApplication1.DAL
         public BookService() : base("BookService")
         {
         }
+
         public DbSet<Book> Books { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Borrow> Borrows { get; set; }

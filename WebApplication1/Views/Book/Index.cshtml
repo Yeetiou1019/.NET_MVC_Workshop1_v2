@@ -1,51 +1,86 @@
-﻿@model IEnumerable<WebApplication1.Models.Book_Data>
+﻿@model IEnumerable<WebApplication1.Models.Book>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>查詢</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("新增書籍", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            書名
+            @Html.DisplayNameFor(model => model.Book_Name)
         </th>
         <th>
-            作者
+            @Html.DisplayNameFor(model => model.Book_Author)
         </th>
         <th>
-           購書日期
+            @Html.DisplayNameFor(model => model.Book_BoughtDate)
         </th>
         <th>
-            借閱狀態
+            @Html.DisplayNameFor(model => model.Book_Publisher)
         </th>
         <th>
-            借閱人
+            @Html.DisplayNameFor(model => model.Book_Note)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.Book_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book_Keeper)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Create_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Create_User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modify_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modify_User)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @item.Book_Name
+            @Html.DisplayFor(modelItem => item.Book_Name)
         </td>
         <td>
-            @item.Book_Author
+            @Html.DisplayFor(modelItem => item.Book_Author)
         </td>
         <td>
-            @item.Book_Bought_Date
+            @Html.DisplayFor(modelItem => item.Book_BoughtDate)
         </td>
         <td>
-            @item.Book_Status
+            @Html.DisplayFor(modelItem => item.Book_Publisher)
         </td>
         <td>
-            @item.Book_Keeper
+            @Html.DisplayFor(modelItem => item.Book_Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book_Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book_Keeper)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Create_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Create_User)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modify_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modify_User)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Book_Id }) |

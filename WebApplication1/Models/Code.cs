@@ -11,9 +11,11 @@ namespace WebApplication1.Models
     public class Code
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string Code_Type { get; set; }
-        [Key]
+        
+        [Key, Column(Order = 0)]
         public string Code_Id { get; set; }
+        [Required]
+        public string Code_Type { get; set; }
         public string Code_Name { get; set; }
         public string Code_TypeDesc { get; set; }
         public DateTime Create_Date { get; set; }
@@ -22,6 +24,6 @@ namespace WebApplication1.Models
         public string Modify_User { get; set; }
      
 
-        public virtual ICollection<Borrow> Borrows { get; set; }
+        public virtual Borrow Borrows { get; set; }
     }
 }

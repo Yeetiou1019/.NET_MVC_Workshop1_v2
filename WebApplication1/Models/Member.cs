@@ -11,7 +11,9 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Member
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,8 +21,9 @@ namespace WebApplication1.Models
         {
             this.Book_Data = new HashSet<Book_Data>();
         }
-    
+        [Key,Column(Order = 0)]
         public string User_Id { get; set; }
+        [Required]
         public string User_CName { get; set; }
         public string User_EName { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }

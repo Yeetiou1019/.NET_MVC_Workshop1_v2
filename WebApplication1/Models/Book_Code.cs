@@ -11,7 +11,9 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Book_Code
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +23,7 @@ namespace WebApplication1.Models
         }
     
         public string Code_Type { get; set; }
+        [Key, Column(Order = 0)]
         public string Code_Id { get; set; }
         public string Code_Type_Desc { get; set; }
         public string Code_Name { get; set; }

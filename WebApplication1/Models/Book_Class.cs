@@ -11,7 +11,9 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Book_Class
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +21,7 @@ namespace WebApplication1.Models
         {
             this.Book_Data = new HashSet<Book_Data>();
         }
-    
+        [Key, Column(Order = 0)]
         public string Book_Class_Id { get; set; }
         public string Book_Class_Name { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }

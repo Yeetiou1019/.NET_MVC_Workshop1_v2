@@ -17,13 +17,15 @@ namespace WebApplication1.Models
         public class Borrow
         {
             
-            
+            [Key, Column(Order = 0)]
             public string User_Id { get; set; }
+        [Key, Column(Order = 1)]
             public int Book_Id { get; set; }
+        [Key,Column(Order = 2)]
             public string Code_Id { get; set; }
             public string Status { get; set; }
-
-            public virtual Book Book { get; set; }
+        
+        public virtual Book Book { get; set; }
             public virtual Member Member { get; set; }
         }
     
