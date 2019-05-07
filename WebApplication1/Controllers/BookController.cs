@@ -17,7 +17,7 @@ namespace WebApplication1.Controllers
         private BookService db = new BookService();
 
         // GET: Book
-        public ActionResult Index(string sortOrder,string searchString , string BookStatusList,int? page ,string currentFilter)
+        public ActionResult Index(string sortOrder,string searchString , string BookStatusList, string BookKeeperList, int? page ,string currentFilter,string BookClassNameList)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -36,6 +36,9 @@ namespace WebApplication1.Controllers
             var books = from s in db.Books
                            select s;
 
+            var classes = from cs in db.Classes
+                          select cs;
+
             var StatusQry = (from d in db.Books
                             orderby d.Book_Status
                             select d.Book_Status).Distinct();
@@ -44,13 +47,40 @@ namespace WebApplication1.Controllers
             StatusList.AddRange(StatusQry.Distinct());
             ViewBag.BookStatusList = new SelectList(StatusList);
 
-            if (!String.IsNullOrEmpty(searchString))
+
+            var KeeperQry = (from d in db.Books
+                             orderby d.Book_Keeper
+                             select d.Book_Keeper).Distinct();
+            var KeeperList = new List<string>();
+            KeeperList.AddRange(KeeperQry.Distinct());
+            ViewBag.BookKeeperList = new SelectList(KeeperList);
+
+            var BookClassQry = (from d in db.Classes
+                             orderby d.Book_Class_Name
+                             select d.Book_Class_Name).Distinct();
+            var ClassNameList = new List<string>();
+            ClassNameList.AddRange(BookClassQry.Distinct());
+            ViewBag.BookClassNameList = new SelectList(ClassNameList);
+
+            if (String.IsNullOrEmpty(searchString))
+            {
+                searchString = null;
+            }
+            else
             {
                 books = books.Where(s => s.Book_Name.Contains(searchString));
             }
             if (!String.IsNullOrEmpty(searchString))
             {
-                books = books.Where(s => s.Book_Status == BookStatusList);
+                books = books.Where(x => x.Book_Status == BookStatusList);
+            }
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(y => y.Book_Keeper == BookKeeperList);
+            }
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                classes = classes.Where(z => z.Book_Class_Name == BookClassNameList);
             }
 
             switch (sortOrder)

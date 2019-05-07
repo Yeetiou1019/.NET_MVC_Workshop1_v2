@@ -27,11 +27,11 @@ namespace WebApplication1.Models
         public string Create_User { get; set; }
         public Nullable<System.DateTime> Modify_Date { get; set; }
         public string Modify_User { get; set; }
-        [Key, Column(Order = 1)]
+        [Key, Column(Order = 3)]
         public string User_Id { get; set; }
         [Key, Column(Order = 2)]
         public string Code_Id { get; set; }
-        [Key, Column(Order = 3)]
+        [Key, Column(Order = 1)]
         public string Book_Class_Id { get; set; }
         [Key, Column(Order = 0)]
         public int Book_Id { get; set; }

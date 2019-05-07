@@ -21,6 +21,7 @@ namespace WebApplication1.DAL
         public DbSet<Member> Members { get; set; }
         public DbSet<Borrow> Borrows { get; set; }
         public DbSet<Code> Codes { get; set; }
+        public DbSet<Class> Classes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

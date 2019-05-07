@@ -13,11 +13,17 @@
 </p>
 @using (Html.BeginForm("Index", "Book", FormMethod.Get))
 {
-    <p>
-        Find by BookName: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        Status: @Html.DropDownList("BookStatusList", (IEnumerable<SelectListItem>)ViewBag.StatusList)
-        <input type="submit" value="Search" />
-    </p>
+<p>
+    書名: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <br>
+    圖書類別:@Html.DropDownList("BookClassNameList", (IEnumerable<SelectListItem>)ViewBag.ClassNameList)
+    <br>
+    借閱人:@Html.DropDownList("BookKeeperList", (IEnumerable<SelectListItem>)ViewBag.KeeperList)
+    <br>
+    借閱狀態: @Html.DropDownList("BookStatusList", (IEnumerable<SelectListItem>)ViewBag.StatusList)
+    <br>
+    <input type="submit" value="Search" />
+</p>
 }
 <table class="table">
     <tr>

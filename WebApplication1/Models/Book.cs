@@ -17,6 +17,8 @@ namespace WebApplication1.Models
         [Required]
         public string Book_Name { get; set; }
         public string Book_Author { get; set; }
+  
+        public string Book_Class_Id { get; set; }
         public DateTime Book_BoughtDate { get; set; }
         public string Book_Publisher { get; set; }
         public string Book_Note { get; set; }

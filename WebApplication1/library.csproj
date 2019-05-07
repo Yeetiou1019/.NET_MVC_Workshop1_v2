@@ -142,6 +142,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905071420197_InitialCreate.cs" />
+    <Compile Include="Migrations\201905071420197_InitialCreate.Designer.cs">
+      <DependentUpon>201905071420197_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905071959098_Book_Class_Id.cs" />
+    <Compile Include="Migrations\201905071959098_Book_Class_Id.Designer.cs">
+      <DependentUpon>201905071959098_Book_Class_Id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Book_Class.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -153,6 +162,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Borrow.cs" />
+    <Compile Include="Models\Class.cs" />
     <Compile Include="Models\Code.cs" />
     <Compile Include="Models\Member.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -243,7 +253,14 @@
     <Content Include="Views\Book\Details.cshtml" />
     <Content Include="Views\Book\Edit.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201905071420197_InitialCreate.resx">
+      <DependentUpon>201905071420197_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905071959098_Book_Class_Id.resx">
+      <DependentUpon>201905071959098_Book_Class_Id.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
