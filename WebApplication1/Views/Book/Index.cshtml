@@ -1,4 +1,6 @@
-﻿@model IEnumerable<WebApplication1.Models.Book>
+﻿@model PagedList.IPagedList<WebApplication1.Models.Book>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
@@ -9,85 +11,74 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("Index", "Book", FormMethod.Get))
+{
+    <p>
+        Find by BookName: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        Status: @Html.DropDownList("BookStatusList", (IEnumerable<SelectListItem>)ViewBag.StatusList)
+        <input type="submit" value="Search" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Book_Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+            @Html.ActionLink("書名", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Book_Author)
+            作者
         </th>
         <th>
-            @Html.ActionLink("Book_BoughtDate", "Index", new { sortOrder = ViewBag.DateSortParm })
+            @Html.ActionLink("購買日期", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Book_Publisher)
+            出版社
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Book_Note)
+            內容簡介
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Book_Status)
+            借閱狀態
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Book_Keeper)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Create_Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Create_User)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Modify_Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Modify_User)
+            借閱人
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Book_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Book_Author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Book_BoughtDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Book_Publisher)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Book_Note)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Book_Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Book_Keeper)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Create_Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Create_User)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Modify_Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Modify_User)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Book_Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Book_Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Book_Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book_Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book_BoughtDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book_Publisher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book_Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book_Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book_Keeper)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Book_Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Book_Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Book_Id })
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

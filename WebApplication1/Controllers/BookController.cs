@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.DAL;
 using WebApplication1.Models;
+using PagedList;
 
 namespace WebApplication1.Controllers
 {
@@ -16,12 +17,42 @@ namespace WebApplication1.Controllers
         private BookService db = new BookService();
 
         // GET: Book
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder,string searchString , string BookStatusList,int? page ,string currentFilter)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var books = from s in db.Books
                            select s;
+
+            var StatusQry = (from d in db.Books
+                            orderby d.Book_Status
+                            select d.Book_Status).Distinct();
+
+            var StatusList = new List<string>();
+            StatusList.AddRange(StatusQry.Distinct());
+            ViewBag.BookStatusList = new SelectList(StatusList);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(s => s.Book_Name.Contains(searchString));
+            }
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(s => s.Book_Status == BookStatusList);
+            }
+
             switch (sortOrder)
             {
                 case "name_desc":
@@ -37,7 +68,9 @@ namespace WebApplication1.Controllers
                     books = books.OrderBy(s => s.Book_Name);
                     break;
             }
-            return View(books.ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(books.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Book/Details/5
