@@ -48,7 +48,7 @@ namespace WebApplication1.Controllers
             //ViewBag.BookStatusList = new SelectList(StatusList);
 
             List<SelectListItem> StatusList = new List<SelectListItem>();
-            StatusList.Add(new SelectListItem { Text = "", Value = "",Selected =true });
+            StatusList.Add(new SelectListItem { Text = "All", Value = "",Selected =true });
             StatusList.Add(new SelectListItem { Text = "可以借出", Value = "A" });
             StatusList.Add(new SelectListItem { Text = "已借出", Value = "B" });
             StatusList.Add(new SelectListItem { Text = "不可借出", Value = "U" });
@@ -63,8 +63,9 @@ namespace WebApplication1.Controllers
             var KeeperList = new List<string>();
             KeeperList.Add("");
             KeeperList.AddRange(KeeperQry.Distinct());
-            
             ViewBag.BookKeeperList = new SelectList(KeeperList);
+           
+
 
             var BookClassQry = (from d in db.Classes
                              orderby d.Book_Class_Name
@@ -75,11 +76,7 @@ namespace WebApplication1.Controllers
             
             ViewBag.BookClassNameList = new SelectList(ClassNameList);
 
-            if (String.IsNullOrEmpty(searchString))
-            {
-                searchString = null;
-            }
-            else
+            if (!String.IsNullOrEmpty(searchString))
             {
                 books = books.Where(s => s.Book_Name.Contains(searchString));
             }
@@ -168,6 +165,8 @@ namespace WebApplication1.Controllers
         // GET: Book/Edit/5
         public ActionResult Edit(int? id)
         {
+            DateTime date = DateTime.Now;
+            ViewBag.Date = date;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -185,10 +184,11 @@ namespace WebApplication1.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Book_Id,Book_Name,Book_Author,Book_BoughtDate,Book_Publisher,Book_Note,Book_Status,Book_Keeper,Create_Date,Create_User,Modify_Date,Modify_User")] Book book)
+        public ActionResult Edit([Bind(Include = "Book_Id,Book_Name,Book_Author,Book_BoughtDate,Book_Class_Id,Book_Publisher,Book_Note,Book_Status,Book_Keeper,Create_Date,Create_User,Modify_Date,Modify_User")] Book book)
         {
             if (ModelState.IsValid)
             {
+
                 db.Entry(book).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

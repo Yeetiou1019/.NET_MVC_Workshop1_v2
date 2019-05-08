@@ -28,6 +28,9 @@
 <table class="table">
     <tr>
         <th>
+            圖書類別
+        </th>
+        <th>
             @Html.ActionLink("書名", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
@@ -51,9 +54,14 @@
         <th></th>
     </tr>
 
+
+
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book_Class_Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Book_Name)
             </td>
