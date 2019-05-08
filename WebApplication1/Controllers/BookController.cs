@@ -108,6 +108,7 @@ namespace WebApplication1.Controllers
                     books = books.OrderBy(s => s.Book_Name);
                     break;
             }
+            
             int pageSize = 3;
             int pageNumber = (page ?? 1);
             return View(books.ToPagedList(pageNumber, pageSize));
@@ -205,13 +206,14 @@ namespace WebApplication1.Controllers
             }
             if (saveChangesError.GetValueOrDefault())
             {
-                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
+                ViewBag.ErrorMessage = "刪除失敗";
             }
             Book book = db.Books.Find(id);
             if (book == null)
             {
                 return HttpNotFound();
             }
+            
             return View(book);
         }
 
@@ -220,17 +222,21 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             try
             {
+                TempData["message"] = "刪除成功";
                 Book book = db.Books.Find(id);
                 db.Books.Remove(book);
                 db.SaveChanges();
+
             }
             catch (DataException/* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
+            
             return RedirectToAction("Index");
         }
 
