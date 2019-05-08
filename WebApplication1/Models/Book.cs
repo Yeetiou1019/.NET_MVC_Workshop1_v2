@@ -29,6 +29,7 @@ namespace WebApplication1.Models
         public DateTime Modify_Date { get; set; }
         public string Modify_User { get; set; }
 
+       
 
 
         public virtual ICollection<Borrow> Borrows { get; set; }

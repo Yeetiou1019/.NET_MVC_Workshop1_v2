@@ -22,9 +22,11 @@ namespace WebApplication1.Models
             this.Book_Data = new HashSet<Book_Data>();
         }
     
-        public string Code_Type { get; set; }
+        
         [Key, Column(Order = 0)]
         public string Code_Id { get; set; }
+        [Required]
+        public string Code_Type { get; set; }
         public string Code_Type_Desc { get; set; }
         public string Code_Name { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }

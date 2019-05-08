@@ -39,27 +39,40 @@ namespace WebApplication1.Controllers
             var classes = from cs in db.Classes
                           select cs;
 
-            var StatusQry = (from d in db.Books
-                            orderby d.Book_Status
-                            select d.Book_Status).Distinct();
+            //var StatusQry = (from d in db.Books
+            //                orderby d.Book_Status
+            //                select d.Book_Status).Distinct();
 
-            var StatusList = new List<string>();
-            StatusList.AddRange(StatusQry.Distinct());
-            ViewBag.BookStatusList = new SelectList(StatusList);
+            //var StatusList = new List<string>();
+            //StatusList.AddRange(StatusQry.Distinct());
+            //ViewBag.BookStatusList = new SelectList(StatusList);
+
+            List<SelectListItem> StatusList = new List<SelectListItem>();
+            StatusList.Add(new SelectListItem { Text = "", Value = "",Selected =true });
+            StatusList.Add(new SelectListItem { Text = "可以借出", Value = "A" });
+            StatusList.Add(new SelectListItem { Text = "已借出", Value = "B" });
+            StatusList.Add(new SelectListItem { Text = "不可借出", Value = "U" });
+            StatusList.Add(new SelectListItem { Text = "已借出(未領)", Value = "C" });
+            
+            ViewBag.StatusList = StatusList;
 
 
             var KeeperQry = (from d in db.Books
                              orderby d.Book_Keeper
                              select d.Book_Keeper).Distinct();
             var KeeperList = new List<string>();
+            KeeperList.Add("");
             KeeperList.AddRange(KeeperQry.Distinct());
+            
             ViewBag.BookKeeperList = new SelectList(KeeperList);
 
             var BookClassQry = (from d in db.Classes
                              orderby d.Book_Class_Name
                              select d.Book_Class_Name).Distinct();
             var ClassNameList = new List<string>();
+            ClassNameList.Add("");
             ClassNameList.AddRange(BookClassQry.Distinct());
+            
             ViewBag.BookClassNameList = new SelectList(ClassNameList);
 
             if (String.IsNullOrEmpty(searchString))
@@ -121,6 +134,9 @@ namespace WebApplication1.Controllers
         // GET: Book/Create
         public ActionResult Create()
         {
+            DateTime date = DateTime.Now;
+            ViewBag.Date = date;
+
             return View();
         }
 
@@ -135,6 +151,7 @@ namespace WebApplication1.Controllers
             {
                 if (ModelState.IsValid)
                 {
+
                     db.Books.Add(book);
                     db.SaveChanges();
                     return RedirectToAction("Index");

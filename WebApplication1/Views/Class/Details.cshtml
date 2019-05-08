@@ -1,0 +1,58 @@
+﻿@model WebApplication1.Models.Class
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Class</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Class_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Class_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Create_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Create_User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create_User)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modify_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modify_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modify_User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modify_User)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Book_Class_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -16,6 +16,7 @@ namespace WebApplication1.Models
 
     public partial class Book_Data
     {
+       [Required]
         public string Book_Name { get; set; }
         public string Book_Author { get; set; }
         public Nullable<System.DateTime> Book_Bought_Date { get; set; }

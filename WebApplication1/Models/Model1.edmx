@@ -56,12 +56,12 @@
     </Key>
     <Property Name="Book_Name" Type="nvarchar" Nullable="false" MaxLength="400" />
     <Property Name="Book_Author" Type="nchar" Nullable="true" MaxLength="60" />
-    <Property Name="Book_Bought_Date" Type="datetime" Nullable="true" />
+    <Property Name="Book_Bought_Date" Type="datetime" Nullable="true" StoreGeneratedPattern="Computed" />
     <Property Name="Book_Publisher" Type="nvarchar" Nullable="true" MaxLength="40" />
     <Property Name="Book_Note" Type="nvarchar" Nullable="true" MaxLength="2400" />
     <Property Name="Book_Status" Type="char" Nullable="false" MaxLength="1" />
     <Property Name="Book_Keeper" Type="nvarchar" Nullable="true" MaxLength="24" />
-    <Property Name="Create_Date" Type="datetime" Nullable="true" />
+    <Property Name="Create_Date" Type="datetime" Nullable="true" StoreGeneratedPattern="Computed"/>
     <Property Name="Create_User" Type="nvarchar" Nullable="true" MaxLength="24" />
     <Property Name="Modify_Date" Type="datetime" Nullable="true" />
     <Property Name="Modify_User" Type="nvarchar" Nullable="true" MaxLength="24" />
@@ -175,7 +175,7 @@
           </Key>
           <Property Name="Book_Name" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="Book_Author" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
-          <Property Name="Book_Bought_Date" Type="DateTime" Precision="3" />
+          <Property Name="Book_Bought_Date" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="Book_Publisher" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="Book_Note" Type="String" MaxLength="2400" FixedLength="false" Unicode="true" />
           <Property Name="Book_Status" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />

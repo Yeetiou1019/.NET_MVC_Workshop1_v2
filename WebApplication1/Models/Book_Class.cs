@@ -23,6 +23,8 @@ namespace WebApplication1.Models
         }
         [Key, Column(Order = 0)]
         public string Book_Class_Id { get; set; }
+
+        [Required]
         public string Book_Class_Name { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }
         public string Create_User { get; set; }

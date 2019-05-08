@@ -10,7 +10,6 @@ namespace WebApplication1.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WebApplication1.DAL.BookService";
         }
 
         protected override void Seed(WebApplication1.DAL.BookService context)
