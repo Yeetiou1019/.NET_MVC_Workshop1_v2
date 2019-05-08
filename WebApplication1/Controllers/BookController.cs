@@ -19,6 +19,9 @@ namespace WebApplication1.Controllers
         // GET: Book
         public ActionResult Index(string sortOrder,string searchString , string BookStatusList, string BookKeeperList, int? page ,string currentFilter,string BookClassNameList)
         {
+
+           
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
@@ -134,8 +137,15 @@ namespace WebApplication1.Controllers
         {
             DateTime date = DateTime.Now;
             ViewBag.Date = date;
+            List<SelectListItem> BookStatusList = new List<SelectListItem>();
+            BookStatusList.Add(new SelectListItem() { Text = "可以借出", Value = "A" });
+            BookStatusList.Add(new SelectListItem() { Text = "已借出", Value = "B" });
+            BookStatusList.Add(new SelectListItem() { Text = "不可借出", Value = "U" });
+            BookStatusList.Add(new SelectListItem() { Text = "已借出(未領)", Value = "C" });
 
-            return View();
+           
+
+            return View(BookStatusList);
         }
 
         // POST: Book/Create

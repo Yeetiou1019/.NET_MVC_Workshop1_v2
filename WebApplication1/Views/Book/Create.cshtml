@@ -75,7 +75,7 @@
 
         <div class="col-md-10">
             借閱狀態<br>
-            @Html.EditorFor(model => model.Book_Status, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownList("BookStaticList")
             @Html.ValidationMessageFor(model => model.Book_Status, "", new { @class = "text-danger" })
         </div>
     </div>
