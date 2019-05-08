@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace WebApplication1.Models
 {
@@ -29,7 +30,8 @@ namespace WebApplication1.Models
         public DateTime Modify_Date { get; set; }
         public string Modify_User { get; set; }
 
-
+        public IEnumerable<SelectListItem> BookStatusList { get; set; }
+        
 
         public virtual Class Classes { get; set; }
         public virtual ICollection<Borrow> Borrows { get; set; }

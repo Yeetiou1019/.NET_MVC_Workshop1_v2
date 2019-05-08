@@ -6,9 +6,7 @@
 @{ 
     var date = ViewBag.Date;
 }
-<div>
-    現在時間:@date.ToString("yyyy/MM/dd HH:mm:ss")
-</div>
+
 
 <h2>Create</h2>
 
@@ -75,7 +73,7 @@
 
         <div class="col-md-10">
             借閱狀態<br>
-            @Html.DropDownList("BookStaticList")
+            @Html.DropDownListFor(m => m.Book_Status,Model.BookStatusList, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Book_Status, "", new { @class = "text-danger" })
         </div>
     </div>

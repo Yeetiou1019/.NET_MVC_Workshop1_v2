@@ -137,15 +137,18 @@ namespace WebApplication1.Controllers
         {
             DateTime date = DateTime.Now;
             ViewBag.Date = date;
-            List<SelectListItem> BookStatusList = new List<SelectListItem>();
-            BookStatusList.Add(new SelectListItem() { Text = "可以借出", Value = "A" });
-            BookStatusList.Add(new SelectListItem() { Text = "已借出", Value = "B" });
-            BookStatusList.Add(new SelectListItem() { Text = "不可借出", Value = "U" });
-            BookStatusList.Add(new SelectListItem() { Text = "已借出(未領)", Value = "C" });
+            List<SelectListItem> BookStatusList2 = new List<SelectListItem>();
+            BookStatusList2.Add(new SelectListItem() { Text = "可以借出", Value = "A" });
+            BookStatusList2.Add(new SelectListItem() { Text = "已借出", Value = "B" });
+            BookStatusList2.Add(new SelectListItem() { Text = "不可借出", Value = "U" });
+            BookStatusList2.Add(new SelectListItem() { Text = "已借出(未領)", Value = "C" });
 
-           
+            Book bk = new Book()
+            {
+                BookStatusList = BookStatusList2
+            };
 
-            return View(BookStatusList);
+            return View(bk);
         }
 
         // POST: Book/Create
