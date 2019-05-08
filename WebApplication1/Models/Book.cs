@@ -30,7 +30,7 @@ namespace WebApplication1.Models
         public DateTime Modify_Date { get; set; }
         public string Modify_User { get; set; }
 
-        public IEnumerable<SelectListItem> BookStatusList { get; set; }
+        public IEnumerable<SelectListItem> BookClassList { get; set; }
         
 
         public virtual Class Classes { get; set; }

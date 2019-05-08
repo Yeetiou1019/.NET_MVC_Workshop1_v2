@@ -73,7 +73,7 @@
 
         <div class="col-md-10">
             借閱狀態<br>
-            @Html.DropDownListFor(m => m.Book_Status,Model.BookStatusList, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Name,Model.BookStatusList, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Book_Status, "", new { @class = "text-danger" })
         </div>
     </div>

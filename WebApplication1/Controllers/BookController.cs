@@ -137,18 +137,19 @@ namespace WebApplication1.Controllers
         {
             DateTime date = DateTime.Now;
             ViewBag.Date = date;
-            List<SelectListItem> BookStatusList2 = new List<SelectListItem>();
-            BookStatusList2.Add(new SelectListItem() { Text = "可以借出", Value = "A" });
-            BookStatusList2.Add(new SelectListItem() { Text = "已借出", Value = "B" });
-            BookStatusList2.Add(new SelectListItem() { Text = "不可借出", Value = "U" });
-            BookStatusList2.Add(new SelectListItem() { Text = "已借出(未領)", Value = "C" });
+
+            List<SelectListItem> BookClassList2 = new List<SelectListItem>();
+            BookClassList2.Add(new SelectListItem() { Text = "可以借出", Value = "A" });
+            BookClassList2.Add(new SelectListItem() { Text = "已借出", Value = "B" });
+            BookClassList2.Add(new SelectListItem() { Text = "不可借出", Value = "U" });
+            BookClassList2.Add(new SelectListItem() { Text = "已借出(未領)", Value = "C" });
 
             Book bk = new Book()
             {
-                BookStatusList = BookStatusList2
+                BookClassList = BookClassList2
             };
 
-            return View(bk);
+            return View();
         }
 
         // POST: Book/Create
@@ -158,6 +159,7 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Book_Id,Book_Name,Book_Author,Book_BoughtDate,Book_Publisher,Book_Note,Book_Status,Book_Keeper,Create_Date,Create_User,Modify_Date,Modify_User")] Book book)
         {
+
             try
             {
                 if (ModelState.IsValid)
@@ -181,6 +183,8 @@ namespace WebApplication1.Controllers
         {
             DateTime date = DateTime.Now;
             ViewBag.Date = date;
+            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
