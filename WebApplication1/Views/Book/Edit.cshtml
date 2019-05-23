@@ -66,8 +66,17 @@
     <div class="form-group">
 
         <div class="col-md-10">
+            圖書類別<br>
+            @Html.DropDownList("BookClassNameList", (IEnumerable<SelectListItem>)ViewBag.ClassNameList)
+            @Html.ValidationMessageFor(model => model.Book_Class_Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10">
             借閱狀態<br>
-            @Html.EditorFor(model => model.Book_Status, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownList("BookStatusList", (IEnumerable<SelectListItem>)ViewBag.StatusList)
             @Html.ValidationMessageFor(model => model.Book_Status, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -81,14 +90,7 @@
         </div>
     </div>
 
-    <div class="form-group">
 
-        <div class="col-md-10">
-            圖書類別<br>
-            @Html.EditorFor(model => model.Book_Class_Id, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Book_Class_Id, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
     <div class="form-group">
 

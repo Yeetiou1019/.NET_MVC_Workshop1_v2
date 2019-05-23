@@ -42,14 +42,7 @@
         </div>
     </div>
 
-    <div class="form-group">
 
-        <div class="col-md-10">
-            購書日期<br>
-            @Html.TextBoxFor(model => model.Book_BoughtDate, new { type = "datetime-local" })
-            @Html.ValidationMessageFor(model => model.Book_BoughtDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
     <div class="form-group">
 
@@ -72,18 +65,29 @@
     <div class="form-group">
 
         <div class="col-md-10">
-            借閱狀態<br>
-            @Html.DropDownListFor(m => m.Name,Model.BookStatusList, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Book_Status, "", new { @class = "text-danger" })
+            購書日期<br>
+            @Html.TextBoxFor(model => model.Book_BoughtDate, new { type = "datetime-local" })
+            @Html.ValidationMessageFor(model => model.Book_BoughtDate, "", new { @class = "text-danger" })
         </div>
     </div>
+
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+            圖書類別<br>
+            @Html.DropDownList("BookClassNameList", (IEnumerable<SelectListItem>)ViewBag.ClassNameList)
+            @Html.ValidationMessageFor(model => model.Book_Class_Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
 
     <div class="form-group">
 
         <div class="col-md-10">
             <br>
             @Html.TextBoxFor(model => model.Create_Date, new { @Value = date.ToString("yyyy/MM/dd HH:mm:ss"), style = "display:none;" })
-            
+
         </div>
     </div>
 
@@ -91,8 +95,8 @@
 
         <div class="col-md-10">
             <br>
-            @Html.TextBoxFor(model => model.Modify_Date, new { @Value = date.ToString("yyyy/MM/dd HH:mm:ss") , style = "display:none;" })
-          
+            @Html.TextBoxFor(model => model.Modify_Date, new { @Value = date.ToString("yyyy/MM/dd HH:mm:ss"), style = "display:none;" })
+
         </div>
     </div>
 

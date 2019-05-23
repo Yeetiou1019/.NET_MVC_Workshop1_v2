@@ -138,16 +138,23 @@ namespace WebApplication1.Controllers
             DateTime date = DateTime.Now;
             ViewBag.Date = date;
 
-            List<SelectListItem> BookClassList2 = new List<SelectListItem>();
-            BookClassList2.Add(new SelectListItem() { Text = "可以借出", Value = "A" });
-            BookClassList2.Add(new SelectListItem() { Text = "已借出", Value = "B" });
-            BookClassList2.Add(new SelectListItem() { Text = "不可借出", Value = "U" });
-            BookClassList2.Add(new SelectListItem() { Text = "已借出(未領)", Value = "C" });
+            var BookClassQry = (from d in db.Classes
+                                orderby d.Book_Class_Name
+                                select d.Book_Class_Name).Distinct();
+            var ClassNameList = new List<string>();
+            ClassNameList.Add("");
+            ClassNameList.AddRange(BookClassQry.Distinct());
 
-            Book bk = new Book()
-            {
-                BookClassList = BookClassList2
-            };
+            ViewBag.BookClassNameList = new SelectList(ClassNameList);
+
+
+            List<SelectListItem> StatusList = new List<SelectListItem>();
+            StatusList.Add(new SelectListItem { Text = "可以借出", Value = "A" });
+            StatusList.Add(new SelectListItem { Text = "已借出", Value = "B" });
+            StatusList.Add(new SelectListItem { Text = "不可借出", Value = "U" });
+            StatusList.Add(new SelectListItem { Text = "已借出(未領)", Value = "C" });
+
+            ViewBag.StatusList = StatusList;
 
             return View();
         }
@@ -184,6 +191,22 @@ namespace WebApplication1.Controllers
             DateTime date = DateTime.Now;
             ViewBag.Date = date;
             
+             List<SelectListItem> StatusList = new List<SelectListItem>();
+            StatusList.Add(new SelectListItem { Text = "可以借出", Value = "A" });
+            StatusList.Add(new SelectListItem { Text = "已借出", Value = "B" });
+            StatusList.Add(new SelectListItem { Text = "不可借出", Value = "U" });
+            StatusList.Add(new SelectListItem { Text = "已借出(未領)", Value = "C" });
+
+            ViewBag.StatusList = StatusList;
+
+            var BookClassQry = (from d in db.Classes
+                                orderby d.Book_Class_Name
+                                select d.Book_Class_Name).Distinct();
+            var ClassNameList = new List<string>();
+            ClassNameList.Add("");
+            ClassNameList.AddRange(BookClassQry.Distinct());
+
+            ViewBag.BookClassNameList = new SelectList(ClassNameList);
 
             if (id == null)
             {
